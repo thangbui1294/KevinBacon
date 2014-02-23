@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    The properties in this file are loaded when the Jotto game application
+    first loads.
+-->
+<properties>
+    <property_list>    
+        <property name="WINDOW_ICON"                value="SDOKBWindowIcon.png"></property>
+        <property name="SPLASH_SCREEN_TITLE_TEXT"   value="Select a Language"></property>
+        <property name="WINDOW_WIDTH"               value="1024"></property>
+        <property name="WINDOW_HEIGHT"              value="720"></property>
+        <property name="SPLASH_SCREEN_IMAGE_NAME"   value="SDOKBSplashScreen.png"></property>
+        <property name="DATA_PATH"                  value="./data/"></property>
+        <property name="IMG_PATH"                   value="./img/"></property>
+        <property name="GUESSES_FONT_FAMILY"        value="monospaced"></property>
+        <property name="GUESSES_FONT_SIZE"          value="14"></property>
+        <property name="GUESS_FONT_SIZE"            value="14"></property>
+        <property name="GUESS_FONT_FAMILY"          value="monospaced"></property>
+        <property name="DEFAULT_YES_TEXT"           value="Yes"></property>
+        <property name="DEFAULT_NO_TEXT"            value="No"></property>
+        <property name="DEFAULT_EXIT_TEXT"          value="Are you sure you wish to Quit?"></property>
+        <property name="ACTORS_FILE_NAME"           value="AllActorsData.txt"></property>
+        <property name="FILMS_FILE_NAME"            value="AllFilmsData.txt"></property>
+    </property_list>
+    <property_options_list>
+        <property_options name="LANGUAGE_OPTIONS">
+            <option>English</option>
+        </property_options>
+        <property_options name="LANGUAGE_DATA_FILE_NAMES">
+            <option>EN.xml</option>
+        </property_options>
+        <property_options name="LANGUAGE_IMAGE_NAMES">
+            <option>EN.png</option>
+        </property_options>
+    </property_options_list>
+</properties>
