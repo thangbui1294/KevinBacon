@@ -8,7 +8,7 @@ import sdokb.ui.KevinBaconUI;
  * KevinBaconGameStateManager runs the game. Note that it does so completely
  * independent of the presentation of the game.
  *
- * @author Richard McKenna & _________________
+ * @author Richard McKenna & Thang Bui
  */
 public class KevinBaconGameStateManager
 {
@@ -196,8 +196,8 @@ public class KevinBaconGameStateManager
             ui.getDocManager().addGameResultToStatsPage(gameInProgress);
             throw new DeadEndException(guess.toString());
         }
-
         // UPDATE THE GAME DISPLAY
+        
         ui.getDocManager().updateGuessesList();        
     }
 }

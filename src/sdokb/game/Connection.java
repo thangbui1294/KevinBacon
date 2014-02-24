@@ -5,7 +5,7 @@ import java.util.*;
  * This class keeps track of the edges in a path through the actor-film
  * graph. This is useful for finding shortest paths through the graph.
  * 
- * @author Richard McKenna & ________________
+ * @author Richard McKenna & Thang Bui
  */
 public class Connection implements Comparable, Comparator
 {

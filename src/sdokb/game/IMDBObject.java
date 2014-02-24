@@ -4,7 +4,7 @@ package sdokb.game;
  * Actors and films will be used interchangeably in methods at times via
  * their ids, so this parent class allows that to happen.
  * 
- * @author Richard McKenna & __________________
+ * @author Richard McKenna & Thang Bui
  */
 public class IMDBObject implements Comparable
 {

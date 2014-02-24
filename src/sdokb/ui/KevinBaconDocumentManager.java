@@ -133,12 +133,13 @@ public class KevinBaconDocumentManager
         KevinBaconGameStateManager gsm = ui.getGSM();
         KevinBaconGameData gameInProgress = gsm.getGameInProgress();
         KevinBaconGameGraphManager graph = gsm.getGameGraphManager();
-
+        
+        //System.out.println(gameInProgress.getDegrees());
         try
         {
             Element ol = gameDoc.getElement(GUESSES_LIST_ID);
             String liText = START_TAG + HTML.Tag.LI + END_TAG
-                            + "BLAH BLAH BLAH BLAH BLAH"
+                            + "This text is from KevinBaconDocumentManager.java"
                             + START_TAG + SLASH + HTML.Tag.LI + END_TAG;
             gameDoc.insertBeforeEnd(ol, liText);
         } 

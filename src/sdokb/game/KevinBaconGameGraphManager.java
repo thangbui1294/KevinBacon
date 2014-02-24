@@ -5,7 +5,7 @@ import java.util.*;
  * This class manages the data associated with the game graph, including
  * having access to all the Films and all the Actors as well as Kevin Bacon.
  * 
- * @author Richard McKenna & ____________________
+ * @author Richard McKenna & Thang Bui
  */
 public class KevinBaconGameGraphManager
 {

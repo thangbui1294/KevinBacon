@@ -8,7 +8,7 @@ import sdokb.SixDegreesOfKevinBacon.KevinBaconPropertyType;
  * a node that does not lead to any nodes that have not yet been visited. The
  * game cannot continue in such a situtation.
  * 
- * @author Richard McKenna & ___________________
+ * @author Richard McKenna & Thang Bui
  */
 public class DeadEndException extends Exception
 {

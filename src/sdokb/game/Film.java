@@ -6,7 +6,7 @@ import java.util.Collections;
 /**
  * Film stores the data associated with an IMDB Film.
  * 
- * @author Richard McKenna & ____________________
+ * @author Richard McKenna & Thang Bui
  */
 public class Film extends IMDBObject
 {   

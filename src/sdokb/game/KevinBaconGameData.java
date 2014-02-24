@@ -12,7 +12,7 @@ import java.util.Map;
  * important that this class works in concert with the
  * KevinBaconGameStateManager.
  * 
- * @author Richard McKenna & ________________
+ * @author Richard McKenna & Thang Bui
  */
 public class KevinBaconGameData
 {
