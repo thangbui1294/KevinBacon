@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+    <property_list>    
+        <property name="GAME_TITLE_TEXT" value="Six Degrees of Kevin Bacon"></property>
+        
+        <!-- THESE ARE THE GUI IMAGES -->
+        <property name="GAME_IMG_NAME"          value="VN_Game.png"></property>
+        <property name="STATS_IMG_NAME"         value="VN_Stats.png"></property>
+        <property name="HELP_IMG_NAME"          value="VN_Help.png"></property>
+        <property name="EXIT_IMG_NAME"          value="VN_Exit.png"></property>
+        <property name="NEW_GAME_IMG_NAME"      value="VN_NewGame.png"></property>
+        <property name="HOME_IMG_NAME"          value="VN_Home.png"></property>
+        
+        <!-- DATA FILES TO LOAD -->
+        <property name="GAME_FILE_NAME"         value="VN_GameDisplay.html"></property>
+        <property name="STATS_FILE_NAME"        value="VN_StatsDisplay.html"></property>
+        <property name="HELP_FILE_NAME"         value="VN_Help.html"></property>
+
+        <!-- IN-GAME TEXT -->
+        <property name="ACTOR_LABEL"            value="Chon dien vien:"></property>
+        <property name="FILM_LABEL"             value="Chon phim:"></property>
+        <property name="SELECT_ACTOR_LABEL"     value="Chon dien vien"></property>
+        <property name="SELECT_FILM_LABEL"      value="Chon phim"></property>
+        <property name="SELECT_LABEL"           value="AN VAO DAY DE CHON"></property>
+        <property name="GAME_SUBHEADER_TEXT"    value="Tim duong den Kevin Bacon tu "></property>
+        <property name="WIN_DISPLAY_TEXT"       value="Ban da thang!"></property>
+        <property name="LOSS_DISPLAY_TEXT"      value="Ban da thua!"></property>
+        <property name="GAME_RESULTS_TEXT"      value="KET QUA"></property>
+        <property name="EXIT_REQUEST_TEXT"      value="Ban co chac chan muon thoat?"></property>
+        <property name="YES_TEXT"               value="Co"></property>
+        <property name="NO_TEXT"                value="Khong"></property>
+        
+        <!-- TOOLTIPS -->
+        <property name="GAME_TOOLTIP"           value="Go to Game Screen"></property>
+        <property name="STATS_TOOLTIP"          value="Go to Stats Summary Screen"></property>
+        <property name="HELP_TOOLTIP"           value="Go to Help Screen"></property>
+        <property name="EXIT_TOOLTIP"           value="Exit the Game Application"></property>
+        <property name="NEW_GAME_TOOLTIP"       value="Start a New Game"></property>
+        <property name="HOME_TOOLTIP"           value="Go Home to Game Help Page"></property>
+        
+        <!-- ERROR FEEDBACK TEXT -->
+        <property name="DEAD_END_GUESS_ERROR_TEXT"      value="Ban da thua vi di toi duong cung"></property>
+        <property name="IMAGE_LOADING_ERROR_TEXT"       value="Khong the tai anh"></property>
+        <property name="INVALID_URL_ERROR_TEXT"         value="Dang tai anh voi duong dan URL khong hop le"></property>
+        <property name="INVALID_DOC_ERROR_TEXT"         value="Loi chinh su van ban HTML"></property>
+        <property name="INVALID_XML_FILE_ERROR_TEXT"    value="XML khong hop le"></property>
+        <property name="DATA_FILE_LOADING_ERROR_TEXT"   value="Khong the tai du lieu"></property>
+    </property_list>
+</properties>

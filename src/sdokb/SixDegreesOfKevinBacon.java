@@ -19,7 +19,7 @@ import sdokb.file.KevinBaconFileUtilities;
  * ending up in a dead end film that doesn't connect to any actors
  * who have not already been used.
  * 
- * @author Richard McKenna & _____________
+ * @author Richard McKenna & Thang Bui
  */
 public class SixDegreesOfKevinBacon
 {

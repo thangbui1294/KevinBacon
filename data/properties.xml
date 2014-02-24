@@ -25,12 +25,15 @@
     <property_options_list>
         <property_options name="LANGUAGE_OPTIONS">
             <option>English</option>
+	    <option>Vietnamese</option>	
         </property_options>
         <property_options name="LANGUAGE_DATA_FILE_NAMES">
             <option>EN.xml</option>
+	    <option>VN.xml</option>
         </property_options>
         <property_options name="LANGUAGE_IMAGE_NAMES">
             <option>EN.png</option>
+            <option>VN.png</option>
         </property_options>
     </property_options_list>
 </properties>
