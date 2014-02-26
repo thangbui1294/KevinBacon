@@ -45,7 +45,7 @@ import sdokb.game.KevinBaconGameGraphManager;
  * This class contains all user interface components and maintains
  * all presentation and interaction objects for running the game.
  * 
- * @author Richard McKenna & _________________
+ * @author Richard McKenna & Thang Bui
  */
 public class KevinBaconUI
 {   
@@ -510,7 +510,7 @@ public class KevinBaconUI
             }    
         });
         
-        // THIS SETS UP THE FONTS USED FOR THE COMBO BOX AND LABEL
+        // THIS SETS UP THE FONTS USED FOR THE COMBO BOX AND LA
         String fontGuessFamily = props.getProperty(KevinBaconPropertyType.GUESSES_FONT_FAMILY);
         int fontGuessSize = Integer.parseInt(props.getProperty(KevinBaconPropertyType.GUESSES_FONT_SIZE));
         Font guessFont = new Font(fontGuessFamily, Font.BOLD, fontGuessSize);

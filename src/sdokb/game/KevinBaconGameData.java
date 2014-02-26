@@ -11,7 +11,7 @@ import java.util.Map;
  * game, including the path the user has followed thus far. It is
  * important that this class works in concert with the
  * KevinBaconGameStateManager.
- * 
+ *
  * @author Richard McKenna & Thang Bui
  */
 public class KevinBaconGameData
@@ -19,7 +19,7 @@ public class KevinBaconGameData
     // THE STARTING ACTOR FOR THIS GAME, THE PLAYER MUST MAKE IT
     // FROM THIS ACTOR TO KEVIN BACON
     private Actor startingActor;
-
+    
     // THIS STORES THE PATH THE PLAYER FOLLOWED
     private ArrayList<Connection> gamePath;
     
@@ -33,18 +33,18 @@ public class KevinBaconGameData
     // A SORTED MAP OF ALL THE ID GUESSES SO FAR. IT PROVIDES
     // FAST, EASY ACCESS TO USE TO CHECK FOR DUPLICATE GUESSES
     private Map<String,IMDBObject> guessMap;
-
+    
     // AT ANY POINT THE GAME IS EITHER EXPECTING A FILM OR ACTOR
     // FROM THE PLAYER, NEVER BOTH. THIS KEEPS TRACK OF WHICH
     private boolean waitingForFilm;
     
-    // WHEN A MOVIE WITH KEVIN BACON IS FOUND, THE GAME 
+    // WHEN A MOVIE WITH KEVIN BACON IS FOUND, THE GAME
     // IS OVER AND THE PLAYER WINS, BUT IF
     // THE PLAYER GIVES UP OR REACHES A DEAD END
     // THIS WELL REMAIN FALSE
     private boolean kevinBaconFound;
     
-    // START AND END TIME WILL BE USED TO CALCULATE THE 
+    // START AND END TIME WILL BE USED TO CALCULATE THE
     // TIME IT TAKES TO PLAY THIS GAME
     private GregorianCalendar startTime;
     private GregorianCalendar endTime;
@@ -55,12 +55,12 @@ public class KevinBaconGameData
     private final long MILLIS_IN_AN_HOUR  = 1000 * 60 * 60;
     
     /*
-     * Construct this object when a game begins.
-     */
+    * Construct this object when a game begins.
+    */
     public KevinBaconGameData(  Actor initStartingActor,
-                                ArrayList<Connection> initShortestPath)
+            ArrayList<Connection> initShortestPath)
     {
-        // INITIALIZE EVERYTHING TO A BRAND NEW GAME, NOTE THAT 
+        // INITIALIZE EVERYTHING TO A BRAND NEW GAME, NOTE THAT
         // THE PATH STARTS OUT AS EMPTY AND A null LAST NODE
         gamePath = new ArrayList();
         lastNode = null;
@@ -87,17 +87,17 @@ public class KevinBaconGameData
     public int getDegrees()                         {   return gamePath.size();     }
     public Iterator<Connection> gamePathIterator()  {   return gamePath.iterator(); }
     public Connection getLastConnection()           {   return lastNode;            }
-
+    
     /**
      * Accessor method for testing to see if Kevin Bacon
      * has been found this game or not.
-     * 
+     *
      * @return true if the secret word has been found this
      * game, false otherwise.
      */
-    public boolean isKevinBaconFound() 
-    { 
-        return kevinBaconFound; 
+    public boolean isKevinBaconFound()
+    {
+        return kevinBaconFound;
     }
     
     /**
@@ -115,7 +115,7 @@ public class KevinBaconGameData
     /**
      * Accessor method for testing to see if the game is waiting
      * for the user to enter a film or not.
-     * 
+     *
      * @return true if the game is waiting for the user to pick
      * a film, false otherwise (an actor).
      */
@@ -126,7 +126,7 @@ public class KevinBaconGameData
     
     /**
      * Gets the total time (in milliseconds) that this game took.
-     * 
+     *
      * @return The time of the game in milliseconds.
      */
     public long getTimeOfGame()
@@ -145,7 +145,7 @@ public class KevinBaconGameData
         long diff = endTimeInMillis - startTimeInMillis;
         return diff;
     }
-
+    
     /**
      * Tests to see if the guessId argument has been made. If it has, true
      * is returned, otherwise false.
@@ -154,7 +154,7 @@ public class KevinBaconGameData
     {
         return guessMap.containsKey(guessId);
     }
-
+    
     /**
      * This method builds and returns a list of all the ids referenced by
      * the guessId that have not already been used in this game.
@@ -163,7 +163,7 @@ public class KevinBaconGameData
     {
         // THE NON-DUPLICATES TO RETURN
         ArrayList<String> nonDuplicates = new ArrayList();
-
+        
         // IF IT'S A FILM, THE QUESTION IS ARE THERE ANY ACTORS IN
         // IT THAT WE HAVEN'T GUESSED ALREADY
         ArrayList<String> guessIds;
@@ -177,7 +177,7 @@ public class KevinBaconGameData
             Actor actor = graph.getActor(guessId);
             guessIds = actor.getFilmIDs();
         }
-
+        
         // ONLY ADD THE NON-DUPLICATES
         for (String id : guessIds)
         {
@@ -185,10 +185,10 @@ public class KevinBaconGameData
             {
                 nonDuplicates.add(id);
             }
-        }        
+        }
         return nonDuplicates;
     }
-
+    
     /**
      * Ends the game as a win.
      */
@@ -198,7 +198,7 @@ public class KevinBaconGameData
         endTime = new GregorianCalendar();
         lastNode.setActor2Id(kevinBacon.getId());
     }
-
+    
     /**
      * Ends the game as a loss.
      */
@@ -206,7 +206,7 @@ public class KevinBaconGameData
     {
         endTime = new GregorianCalendar();
     }
-
+    
     /**
      * Tests to see if the current game path contains the testActorId. Returns
      * true if it does, false otherwise.
@@ -219,7 +219,7 @@ public class KevinBaconGameData
             Connection connection = it.next();
             if (connection.getActor1Id().equals(testActorId)
                     ||
-               (connection.getActor2Id() != null) && connection.getActor2Id().equals(testActorId))
+                    (connection.getActor2Id() != null) && connection.getActor2Id().equals(testActorId))
                 return true;
         }
         return false;
@@ -241,7 +241,7 @@ public class KevinBaconGameData
                     return true;
             }
         }
-        return false;        
+        return false;
     }
     
     /**
@@ -253,7 +253,7 @@ public class KevinBaconGameData
         // CALCULATE GAME TIME USING HOURS : MINUTES : SECONDS
         long timeInMillis = this.getTimeOfGame();
         long hours = timeInMillis/MILLIS_IN_AN_HOUR;
-        timeInMillis -= hours * MILLIS_IN_AN_HOUR;        
+        timeInMillis -= hours * MILLIS_IN_AN_HOUR;
         long minutes = timeInMillis/MILLIS_IN_A_MINUTE;
         timeInMillis -= minutes * MILLIS_IN_A_MINUTE;
         long seconds = timeInMillis/MILLIS_IN_A_SECOND;
@@ -270,7 +270,30 @@ public class KevinBaconGameData
         
         return text;
     }
-    
+    //My code
+    /**
+     * This method used to add a guess as a IMDB Object(Film or Actor) to the gamepath
+     */
+    public void addGuess(IMDBObject guess){
+        guessMap.put(guess.getId(), guess);
+        if (isWaitingForFilm()){
+            Connection connection = new Connection(startingActor.getId(), guess.getId());
+            gamePath.add(connection);
+            lastNode = connection;
+        }
+        else{
+            Iterator<Connection> it = gamePath.iterator();
+            while (it.hasNext()){
+                Connection connection1 = it.next();
+                if (!connection1.hasTwoActors()){
+                    connection1.setActor2Id(guess.getId());
+                }
+            }
+            startingActor = (Actor)guess;
+        }
+        waitingForFilm = !waitingForFilm;
+    }
+    //
     /**
      * A textual representation of this object.
      */

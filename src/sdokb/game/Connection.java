@@ -174,7 +174,7 @@ public class Connection implements Comparable, Comparator
      * Creates and returns a textual representation of this connection, which is
      * represented by the three ids.
      * 
-     * @return the three IMDB ids strung together.
+     * @return the three IMDB ids string together.
      */
     @Override
     public String toString()

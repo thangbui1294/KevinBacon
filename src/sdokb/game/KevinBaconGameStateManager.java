@@ -16,33 +16,33 @@ public class KevinBaconGameStateManager
     // ONE OF THESE THREE STATES
     public enum KevinBaconGameState
     {
-
+        
         GAME_NOT_STARTED,
         GAME_IN_PROGRESS,
         GAME_OVER
     }
-
+    
     // THIS IS THE STATE FOR THE GAME IN PROGRESS
     private KevinBaconGameState currentGameState;
-
+    
     // THIS IS THE GAME CURRENTLY BEING PLAYED
     private KevinBaconGameData gameInProgress;
-
+    
     // WHEN THE STATE OF THE GAME CHANGES IT WILL NEED TO BE
     // REFLECTED IN THE USER INTERFACE, SO THIS CLASS NEEDS
     // A REFERENCE TO THE UI
     private KevinBaconUI ui;
-
+    
     // HOLDS ALL OF THE COMPLETED GAMES. NOTE THAT THE GAME
     // IN PROGRESS IS NOT ADDED UNTIL IT IS COMPLETED
     private ArrayList<KevinBaconGameData> gamesHistory;
-
+    
     // THE ACTOR/FILMS GAME GRAPH DATA STRUCTURE
     private KevinBaconGameGraphManager gameGraphManager;
-
-    // THIS IS 
+    
+    // THIS IS
     private final String NEWLINE_DELIMITER = "\n";
-
+    
     /**
      * This constructor initializes this class for use, but does not start a
      * game.
@@ -55,58 +55,58 @@ public class KevinBaconGameStateManager
     {
         // STORE THIS FOR LATER
         ui = initUI;
-
+        
         // WE HAVE NOT STARTED A GAME YET
         currentGameState = KevinBaconGameState.GAME_NOT_STARTED;
-
+        
         // NO GAMES HAVE BEEN PLAYED YET, BUT INITIALIZE
         // THE DATA STRCUTURE FOR PLACING COMPLETED GAMES
         gamesHistory = new ArrayList();
-
+        
         // THE FIRST GAME HAS NOT BEEN STARTED YET
         gameInProgress = null;
-
+        
         // THIS IS THE ACTUAL GAME GRAPH THAT WE'LL
         // WALK TO FIND CONNECTIONS BETWEEN ACTORS & FILMS
         gameGraphManager = new KevinBaconGameGraphManager();
     }
-
+    
     // ACCESSOR METHODS
     public KevinBaconGameGraphManager getGameGraphManager()
     {
         return gameGraphManager;
     }
-
+    
     public KevinBaconGameData getGameInProgress()
     {
         return gameInProgress;
     }
-
+    
     public int getNumGamesPlayed()
     {
         return gamesHistory.size();
     }
-
+    
     public Iterator<KevinBaconGameData> getGamesHistoryIterator()
     {
         return gamesHistory.iterator();
     }
-
+    
     public boolean isGameNotStarted()
     {
         return currentGameState == KevinBaconGameState.GAME_NOT_STARTED;
     }
-
+    
     public boolean isGameOver()
     {
         return currentGameState == KevinBaconGameState.GAME_OVER;
     }
-
+    
     public boolean isGameInProgress()
     {
         return currentGameState == KevinBaconGameState.GAME_IN_PROGRESS;
     }
-
+    
     /**
      * This method starts a new game, initializing all the necessary data for
      * that new game as well as recording the current game (if it exists) in the
@@ -121,7 +121,7 @@ public class KevinBaconGameStateManager
         {
             gamesHistory.add(gameInProgress);
         }
-
+        
         // IF THERE IS A GAME IN PROGRESS AND THE PLAYER HASN'T WON, THAT MEANS
         // THE PLAYER IS QUITTING, SO WE NEED TO SAVE THE GAME TO OUR HISTORY
         // DATA STRUCTURE. NOTE THAT IF THE PLAYER WON THE GAME, IT WOULD HAVE
@@ -131,23 +131,23 @@ public class KevinBaconGameStateManager
         {
             // QUIT THE GAME, WHICH SETS THE END TIME
             gameInProgress.endGameAsLoss();
-
+            
             // MAKE SURE THE STATS PAGE KNOWS ABOUT THE COMPLETED GAME
             ui.getDocManager().addGameResultToStatsPage(gameInProgress);
         }
-
+        
         // AND NOW MAKE A NEW GAME
         makeNewGame();
-
+        
         // AND UPDATE THE GAME DISPLAY
         ui.resetUI();
         ui.getDocManager().updateActorInGamePage();
-
+        
         // LOAD ALL THE FILMS INTO THE COMBO BOX
         ArrayList<String> startingActorFilmIds = gameInProgress.getStartingActor().getFilmIDs();
         ui.reloadComboBox(startingActorFilmIds);
     }
-
+    
     /**
      * This method chooses a secret word and uses it to create a new game,
      * effectively starting it.
@@ -157,14 +157,14 @@ public class KevinBaconGameStateManager
         // FIRST PICK THE ACTOR
         Actor startingActor = gameGraphManager.pickRandomActor();
         ArrayList<Connection> shortestPath = gameGraphManager.findShortestPathToKevinBacon(startingActor);
-
+        
         // THEN MAKE THE GAME WITH IT
         gameInProgress = new KevinBaconGameData(startingActor, shortestPath);
-
+        
         // THE GAME IS OFFICIALLY UNDERWAY
         currentGameState = KevinBaconGameState.GAME_IN_PROGRESS;
     }
-
+    
     /**
      * This method processes the guess, checking to make sure it's in the
      * dictionary in use and then updating the game accordingly.
@@ -182,22 +182,77 @@ public class KevinBaconGameStateManager
         {
             return;
         }
-
+        
         ArrayList<String> nonCircularEdges = gameInProgress.getNonRepeatingIds(guess.getId(), gameGraphManager);
-
-        // DEAD END, NOWHERE TO GO
-        if (nonCircularEdges.isEmpty())
-        {
-            // END THE GAME IN A LOSS
+        //My code
+        if (guess.getId().equals("nm0000102")){
             currentGameState = KevinBaconGameState.GAME_OVER;
+            gameInProgress.endGameAsWin((Actor)guess);
             gamesHistory.add(gameInProgress);
             ui.enableGuessComboBox(false);
             ui.getDocManager().updateGuessesList();
             ui.getDocManager().addGameResultToStatsPage(gameInProgress);
-            throw new DeadEndException(guess.toString());
+        }
+        else{
+            gameInProgress.addGuess(guess);
+            
+            // DEAD END, NOWHERE TO GO
+            if (nonCircularEdges.isEmpty())
+            {
+                // END THE GAME IN A LOSS
+                currentGameState = KevinBaconGameState.GAME_OVER;
+                gameInProgress.endGameAsLoss();
+                gamesHistory.add(gameInProgress);
+                ui.enableGuessComboBox(false);
+                ui.getDocManager().updateGuessesList();
+                ui.getDocManager().addGameResultToStatsPage(gameInProgress);
+                throw new DeadEndException(guess.toString());
+            }
+            else ui.reloadComboBox(nonCircularEdges);
+            
         }
         // UPDATE THE GAME DISPLAY
         
-        ui.getDocManager().updateGuessesList();        
+        ui.getDocManager().updateGuessesList();
+        
+        //Test gamePath
+        Iterator<Connection> it = gameInProgress.gamePathIterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
+        System.out.println("Game History has " + gamesHistory.size() + " games");
+        
+        
+    }
+    
+    public int getGamePlayed(){
+        return gamesHistory.size();
+    }
+    
+    public int getGameWin(){
+        int count = 0;
+        for (int i = 0; i < gamesHistory.size(); i++){
+            if (gamesHistory.get(i).isKevinBaconFound())
+                count++;
+        }
+        return count;
+    }
+    
+    public int getGameLoss(){
+        int count = 0;
+        for (int i = 0; i < gamesHistory.size(); i++){
+            if (!(gamesHistory.get(i).isKevinBaconFound()))
+                count++;
+        }
+        return count;
+    }
+    
+    public int getPerfectWin(){
+        int count = 0;
+        for (int i = 0; i < gamesHistory.size(); i++){
+            if (gamesHistory.get(i).isPerfectWin())
+                count++;
+        }
+        return count;
     }
 }

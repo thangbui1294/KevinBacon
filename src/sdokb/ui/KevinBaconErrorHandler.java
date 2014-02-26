@@ -11,7 +11,7 @@ import properties_manager.PropertiesManager;
  * improperly XML files are loaded or the user provides improper
  * input.
  * 
- * @author Richard McKenna & _______________________
+ * @author Richard McKenna & Thang Bui
  */
 public class KevinBaconErrorHandler
 {

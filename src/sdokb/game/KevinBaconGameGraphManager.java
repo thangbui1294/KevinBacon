@@ -45,7 +45,23 @@ public class KevinBaconGameGraphManager
     {
         return films.entrySet().iterator();
     }
-
+    
+    /** My code
+     * This method return the films list 
+     * @return the list of films as an TreeMap<String, Film>
+     */
+    public TreeMap<String, Film> getFilmList(){
+        return films;
+    }
+    
+    /** My code
+     * This method return the films list 
+     * @return the list of films as an TreeMap<String, Film>
+     */
+    public TreeMap<String, Actor> getActorList(){
+        return actors;
+    }
+    
     /*
      * This method returns an Iterator that can be used to access all
      * Actors in this graph.

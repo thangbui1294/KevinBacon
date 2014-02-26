@@ -16,7 +16,7 @@ import sdokb.game.IMDBObject;
  * we are registering anonymous event handlers that forward handing to methods
  * inside this class.
  * 
- * @author Richard McKenna & ___________________
+ * @author Richard McKenna & Thang Bui
  */
 public class KevinBaconEventHandler
 {
