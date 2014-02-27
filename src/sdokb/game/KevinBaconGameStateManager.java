@@ -190,7 +190,6 @@ public class KevinBaconGameStateManager
             gameInProgress.endGameAsWin((Actor)guess);
             gamesHistory.add(gameInProgress);
             ui.enableGuessComboBox(false);
-            ui.getDocManager().updateGuessesList();
             ui.getDocManager().addGameResultToStatsPage(gameInProgress);
         }
         else{

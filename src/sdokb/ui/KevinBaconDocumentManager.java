@@ -169,7 +169,7 @@ public class KevinBaconDocumentManager
             if (gameInProgress.isKevinBaconFound()){
                 Element h2 = gameDoc.getElement(WIN_DISPLAY_ID);
                 String h2Text = START_TAG + HTML.Tag.BR + END_TAG
-                            + props.getProperty(KevinBaconPropertyType.WIN_DISPLAY_TEXT) + "TEST"
+                            + props.getProperty(KevinBaconPropertyType.WIN_DISPLAY_TEXT)
                             + START_TAG + SLASH + HTML.Tag.BR + END_TAG;
                 gameDoc.insertBeforeEnd(h2, h2Text);
             }
