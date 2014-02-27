@@ -182,3 +182,4 @@ public class Connection implements Comparable, Comparator
         return actor1Id + filmId + actor2Id;
     }
 }
+

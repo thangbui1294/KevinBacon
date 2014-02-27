@@ -149,24 +149,35 @@ public class KevinBaconDocumentManager
             Iterator<Connection> it = gameInProgress.gamePathIterator();
             while (it.hasNext()){
                 Connection connection = it.next();
-                if (connection == gameInProgress.getLastConnection()){
+                if (connection.hasTwoActors()){
                     String liText = START_TAG + HTML.Tag.LI + END_TAG
-                            + connection.getActor1Id() + DASHES + connection.getFilmId() + DASHES
+                            + graph.getActor(connection.getActor1Id()) + DASHES + 
+                            graph.getFilm(connection.getFilmId()) + DASHES + 
+                            graph.getActor(connection.getActor2Id())
                             + START_TAG + SLASH + HTML.Tag.LI + END_TAG;
                     gameDoc.insertBeforeEnd(ol, liText);
                 }
-                else {
-                    String liText = START_TAG + HTML.Tag.LI + END_TAG
-                            + connection.getActor1Id() + DASHES + connection.getFilmId() + DASHES + connection.getActor2Id()
+                
+                else{
+                     String liText = START_TAG + HTML.Tag.LI + END_TAG
+                            + graph.getActor(connection.getActor1Id()) + DASHES 
+                             + graph.getFilm(connection.getFilmId())  + DASHES
                             + START_TAG + SLASH + HTML.Tag.LI + END_TAG;
                     gameDoc.insertBeforeEnd(ol, liText);
                 }
             }
             if (gameInProgress.isKevinBaconFound()){
                 Element h2 = gameDoc.getElement(WIN_DISPLAY_ID);
-                String h2Text = START_TAG + HTML.Tag.LI + END_TAG
+                String h2Text = START_TAG + HTML.Tag.BR + END_TAG
                             + props.getProperty(KevinBaconPropertyType.WIN_DISPLAY_TEXT)
-                            + START_TAG + SLASH + HTML.Tag.LI + END_TAG;
+                            + START_TAG + SLASH + HTML.Tag.BR + END_TAG;
+                gameDoc.insertBeforeEnd(h2, h2Text);
+            }
+            if ((gsm.isGameOver()) && !(gameInProgress.isKevinBaconFound())){
+                Element h2 = gameDoc.getElement(WIN_DISPLAY_ID);
+                String h2Text = START_TAG + HTML.Tag.BR + END_TAG
+                            + props.getProperty(KevinBaconPropertyType.LOSS_DISPLAY_TEXT)
+                            + START_TAG + SLASH + HTML.Tag.BR + END_TAG;
                 gameDoc.insertBeforeEnd(h2, h2Text);
             }
         }
@@ -237,6 +248,32 @@ public class KevinBaconDocumentManager
             
             Element perfectWinElement = statsDoc.getElement(PERFECT_WINS_ID);
             statsDoc.setInnerHTML(perfectWinElement, EMPTY_TEXT + gsm.getPerfectWin());
+            
+            String dateTimeDegree = completedGame.getGameTimeDescription() + SLASH + completedGame.getDegrees();
+            Iterator<Connection> it = completedGame.gamePathIterator();
+            String gamePath = "";
+            if (!it.hasNext()){
+                gamePath = DASHES + completedGame.getStartingActor();
+            }
+            while (it.hasNext()){
+                Connection connection = it.next();
+                if (connection != completedGame.getLastConnection()){
+                    gamePath = gamePath + DASHES + graph.getActor(connection.getActor1Id()) + DASHES + graph.getFilm(connection.getFilmId());
+                }
+                else{
+                    if (connection.hasTwoActors()){
+                        gamePath = gamePath + graph.getActor(connection.getActor1Id()) + DASHES + graph.getFilm(connection.getFilmId()) + DASHES + graph.getActor(connection.getActor2Id());
+                    }
+                    else{
+                        gamePath = gamePath + DASHES + graph.getActor(connection.getActor1Id()) + DASHES + graph.getFilm(connection.getFilmId());
+                    }
+                }
+            }
+            String liText = START_TAG + HTML.Tag.LI + END_TAG
+                            + dateTimeDegree + gamePath
+                            + START_TAG + SLASH + HTML.Tag.LI + END_TAG;
+            Element gameResultList = statsDoc.getElement(GAME_RESULTS_LIST_ID);
+            statsDoc.insertBeforeEnd(gameResultList, liText);
         }
         // WE'LL LET THE ERROR HANDLER TAKE CARE OF ANY ERRORS,
         // WHICH COULD HAPPEN IF XML SETUP FILES ARE IMPROPERLY

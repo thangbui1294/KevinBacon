@@ -215,12 +215,6 @@ public class KevinBaconGameStateManager
         
         ui.getDocManager().updateGuessesList();
         
-        //Test gamePath
-        Iterator<Connection> it = gameInProgress.gamePathIterator();
-        while (it.hasNext()){
-            System.out.println(it.next());
-        }
-        System.out.println("Game History has " + gamesHistory.size() + " games");
         
         
     }
