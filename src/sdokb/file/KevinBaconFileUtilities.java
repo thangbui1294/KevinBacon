@@ -31,7 +31,7 @@ import sdokb.game.KevinBaconGameGraphManager;
  * are just one and done functions, this class has no instance or static
  * variables.
  *
- * @author Richard McKenna & ____________________
+ * @author Richard McKenna & Thang Bui
  */
 public class KevinBaconFileUtilities
 {

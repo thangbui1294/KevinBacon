@@ -135,20 +135,15 @@ public class KevinBaconDocumentManager
         KevinBaconGameStateManager gsm = ui.getGSM();
         KevinBaconGameData gameInProgress = gsm.getGameInProgress();
         KevinBaconGameGraphManager graph = gsm.getGameGraphManager();
-        
-        //System.out.println(gameInProgress.getDegrees());
         try
         {
-            
-            
-            
+            //UPDATE THE GUESS LIST IN GAME DISPLAY PAGE
             Element ol = gameDoc.getElement(GUESSES_LIST_ID);
-           // gameDoc.replace(ol.getStartOffset(), ol.getEndOffset() - ol.getStartOffset() - 1 , "", null);
-           // gameDoc.remove(ol.getStartOffset() + 1, ol.getEndOffset() - ol.getStartOffset());
             gameDoc.setInnerHTML(ol, START_TAG + HTML.Tag.BR + END_TAG);
             Iterator<Connection> it = gameInProgress.gamePathIterator();
             while (it.hasNext()){
                 Connection connection = it.next();
+                // Creating a list if the connection is not the last node
                 if (connection.hasTwoActors()){
                     String liText = START_TAG + HTML.Tag.LI + END_TAG
                             + graph.getActor(connection.getActor1Id()) + DASHES + 
@@ -157,7 +152,7 @@ public class KevinBaconDocumentManager
                             + START_TAG + SLASH + HTML.Tag.LI + END_TAG;
                     gameDoc.insertBeforeEnd(ol, liText);
                 }
-                
+                // Creating a list if the connection is the last node
                 else{
                      String liText = START_TAG + HTML.Tag.LI + END_TAG
                             + graph.getActor(connection.getActor1Id()) + DASHES 
@@ -166,6 +161,7 @@ public class KevinBaconDocumentManager
                     gameDoc.insertBeforeEnd(ol, liText);
                 }
             }
+            //Display "You Win"
             if (gameInProgress.isKevinBaconFound()){
                 Element h2 = gameDoc.getElement(WIN_DISPLAY_ID);
                 String h2Text = START_TAG + HTML.Tag.BR + END_TAG
@@ -173,6 +169,7 @@ public class KevinBaconDocumentManager
                             + START_TAG + SLASH + HTML.Tag.BR + END_TAG;
                 gameDoc.insertBeforeEnd(h2, h2Text);
             }
+            //Display "You Loss"
             if ((gsm.isGameOver()) && !(gameInProgress.isKevinBaconFound())){
                 Element h2 = gameDoc.getElement(WIN_DISPLAY_ID);
                 String h2Text = START_TAG + HTML.Tag.BR + END_TAG
@@ -238,7 +235,7 @@ public class KevinBaconDocumentManager
         {
             // USE THE STATS TO UPDATE THE TABLE AT THE TOP OF THE PAGE
             Element gamePlayedElement = statsDoc.getElement(GAMES_PLAYED_ID);
-            statsDoc.setInnerHTML(gamePlayedElement, EMPTY_TEXT + gsm.getGamePlayed());
+            statsDoc.setInnerHTML(gamePlayedElement, EMPTY_TEXT + gsm.getNumGamesPlayed());
             
             Element winElement = statsDoc.getElement(WINS_ID);
             statsDoc.setInnerHTML(winElement, EMPTY_TEXT + gsm.getGameWin());
@@ -249,6 +246,7 @@ public class KevinBaconDocumentManager
             Element perfectWinElement = statsDoc.getElement(PERFECT_WINS_ID);
             statsDoc.setInnerHTML(perfectWinElement, EMPTY_TEXT + gsm.getPerfectWin());
             
+            //UPDATE THE GAME STATS LIST BELOW THE TABLE AT THE TOP OF THE PAGE
             String dateTimeDegree = completedGame.getGameTimeDescription() + SLASH + completedGame.getDegrees();
             Iterator<Connection> it = completedGame.gamePathIterator();
             String gamePath = "";

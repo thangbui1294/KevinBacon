@@ -218,11 +218,11 @@ public class KevinBaconGameStateManager
         
     }
     
-    public int getGamePlayed(){
-        return gamesHistory.size();
-    }
-    
-    public int getGameWin(){
+    /**
+     * This method will return the number of game that the player wins
+     * @return number of game that the player wins as an int
+     */
+     public int getGameWin(){
         int count = 0;
         for (int i = 0; i < gamesHistory.size(); i++){
             if (gamesHistory.get(i).isKevinBaconFound())
@@ -231,6 +231,10 @@ public class KevinBaconGameStateManager
         return count;
     }
     
+     /**
+     * This method will return the number of game that the player losses
+     * @return number of game that the player losses as an int
+     */
     public int getGameLoss(){
         int count = 0;
         for (int i = 0; i < gamesHistory.size(); i++){
@@ -240,6 +244,10 @@ public class KevinBaconGameStateManager
         return count;
     }
     
+    /**
+     * This method will return the number of game that the player wins with the shortest path
+     * @return number of game that the player wins in fastest way as an int
+     */
     public int getPerfectWin(){
         int count = 0;
         for (int i = 0; i < gamesHistory.size(); i++){

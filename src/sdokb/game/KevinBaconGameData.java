@@ -270,17 +270,21 @@ public class KevinBaconGameData
         
         return text;
     }
-    //My code
+    
     /**
-     * This method used to add a guess as a IMDB Object(Film or Actor) to the gamepath
+     * This method used to add a guess (Film or Actor) to the current game path
+     * @param guess: Film or Actor guess needed to be add to the path as an IMDBObject
      */
     public void addGuess(IMDBObject guess){
+        //Put the guess to guessMap 
         guessMap.put(guess.getId(), guess);
+        //Adding with the guess is a film
         if (isWaitingForFilm()){
             Connection connection = new Connection(startingActor.getId(), guess.getId());
             gamePath.add(connection);
             lastNode = connection;
         }
+        //Adding with the guess is a movie
         else{
             Iterator<Connection> it = gamePath.iterator();
             while (it.hasNext()){
@@ -291,6 +295,7 @@ public class KevinBaconGameData
             }
             startingActor = (Actor)guess;
         }
+        //Update statues of waitingForFilm
         waitingForFilm = !waitingForFilm;
     }
     //
